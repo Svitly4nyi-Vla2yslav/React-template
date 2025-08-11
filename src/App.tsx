@@ -4,7 +4,7 @@ import Home from './pages/HomePage/HomePage';
 import AboutUs from './pages/AboutUs/AboutUs';
 import Contact from './pages/Contact/Contact';
 import Info from './pages/Info/Info';
-import ParticlesBackground from './components/Background/StarrySky';
+// import ParticlesBackground from './components/Background/StarrySky';
 
 import { Time } from './components/ScrollToTop';
 import { useEffect } from 'react';
@@ -32,7 +32,7 @@ export const App: React.FC = () => {
 
   return (
     <>
-      <ParticlesBackground />
+      {/* <ParticlesBackground /> */}
       {/* <ScrollToTop /> */}
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Navigate to="/home" />} />
