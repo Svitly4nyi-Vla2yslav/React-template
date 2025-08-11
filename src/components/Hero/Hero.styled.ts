@@ -1,5 +1,4 @@
 import styled, { keyframes } from "styled-components";
-import { clickEffect, gradientFlow, pulse } from "../ButtonTryForFree/ButtonTryForFree";
 
 export const Container = styled.div`
   position: absolute;
@@ -323,18 +322,7 @@ width: 100%;
   
   transition: all 0.4s ease;
   
-  &:hover {
-    box-shadow: inset 0 0 8px 0 rgba(255, 255, 255, 0.74), 
-                0 0 15px rgba(73, 75, 236, 0.5);
-    transform: perspective(500px) rotateX(10deg) translateY(-2px);
-    animation: ${pulse} 2s infinite, ${gradientFlow} 3s ease infinite;
-    background-size: 200% 200%;
-  }
-  
-  &:active {
-    animation: ${clickEffect} 0.3s ease, ${gradientFlow} 6s ease infinite;
-    background: linear-gradient(139deg, #3a3bc7, #494bec, #3a3bc7);
-  }
+
   
   &::after {
     content: '';
@@ -404,12 +392,10 @@ z-index: 10;
     box-shadow: inset 0 0 8px 0 rgba(255, 255, 255, 0.74), 
                 0 0 15px rgba(115, 115, 115, 0.5);
     transform: perspective(500px) rotateX(10deg) translateY(-2px);
-    animation: ${pulseGrey} 2s infinite, ${gradientFlow} 3s ease infinite;
     background-size: 200% 200%;
   }
   
   &:active {
-    animation: ${clickEffect} 0.3s ease, ${gradientFlow} 6s ease infinite;
     background: linear-gradient(139deg, #3a3bc7, #494bec, #3a3bc7);
   }
   

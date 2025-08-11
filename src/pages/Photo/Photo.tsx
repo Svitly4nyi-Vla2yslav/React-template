@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  WorkContainer,
-  WorkTitel,
-  WorkTitelContainer,
-} from '../ServicePages/ServicePages.styled';
-import { Border } from '../../components/Footer/Footer.styled';
+
 
 
 export type WorkItemData = {
@@ -21,16 +16,9 @@ export type WorkItemData = {
 const Photo: React.FC = () => {
 
   return (
-    <WorkContainer>
-      <WorkTitelContainer>
-        <WorkTitel>PHOTOGRAPHY</WorkTitel>
-       
-      </WorkTitelContainer>
-
-      
-      <Border />
-     
-    </WorkContainer>
+    <>
+      <h1>Welcome to Our Photography Page</h1>
+    </>
   );
 };
 

@@ -10,17 +10,12 @@ import {
   DropdownMenu,
   DropdownItem,
   ServiceLink,
-  ArrowDown,
 } from './Header.styled';
 import { useMediaQuery } from 'react-responsive';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import logo from '../../assets/icons/logo-srm.svg';
-import ButtonTryForFree from '../ButtonTryForFree/ButtonTryForFree';
+
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import Down from '../../assets/icons/chevron-down.svg';
 import BurgerMenu from '../MobileMenu/MobileMenu';
 
 const Header: React.FC = () => {
@@ -46,8 +41,7 @@ const Header: React.FC = () => {
   };
 
   useEffect(() => {
-    AOS.init({ duration: 3000 });
-    AOS.refresh();
+ 
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
@@ -62,7 +56,7 @@ const Header: React.FC = () => {
     <NavbarContainer $isScrolled={isScrolled}>
       <HeaderWrapper id="header">
         <Logo to="/home#hero" onClick={handleLogoClick}>
-          <img src={logo} alt={t('header.logoAlt')} />
+        
         </Logo>
 
         {!isMobile && (
@@ -78,7 +72,6 @@ const Header: React.FC = () => {
             >
               <ServiceLink>
                 <StyledNavLink to="/service#all" style={{padding: "10px 0px"}}>
-                  {t('header.nav.service')} <ArrowDown src={Down} alt="⬇️" />
                 </StyledNavLink>
                 {isServicesOpen && (
                   <DropdownMenu>
@@ -152,7 +145,6 @@ const Header: React.FC = () => {
         <LangButtonContainer>
           <div style={{ display: 'flex' }}>
             <LanguageSwitcher />
-            <ButtonTryForFree />
           {isMobile && (<BurgerMenu/>)}  
           </div>
         </LangButtonContainer>

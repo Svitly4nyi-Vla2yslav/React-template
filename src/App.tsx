@@ -1,23 +1,11 @@
-import {
-  Navigate,
-  Route,
-  Routes,
-  useLocation,
-} from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { Layout } from './components/Layout/Layout';
 import Home from './pages/HomePage/HomePage';
 import AboutUs from './pages/AboutUs/AboutUs';
 import Contact from './pages/Contact/Contact';
 import Info from './pages/Info/Info';
 import ParticlesBackground from './components/Background/StarrySky';
-import CustomerExperience from './pages/ServicePages/CustomerExperience';
-import PosStaffOperations from './pages/ServicePages/PosStaffOperations';
-import KitchenFulfillment from './pages/ServicePages/KitchenFulfillment';
-import InventoryWarehousing from './pages/ServicePages/InventoryWarehousing';
-import AnalyticsManagement from './pages/ServicePages/AnalyticsManagement';
-import MarketingCustomization from './pages/ServicePages/MarketingCustomization';
-import IntegrationScaling from './pages/ServicePages/IntegrationScaling';
-import ServicesMain from './pages/ServicePages/ServicesMain';
+
 import { Time } from './components/ScrollToTop';
 import { useEffect } from 'react';
 // import { useEffect } from 'react';
@@ -45,7 +33,7 @@ export const App: React.FC = () => {
   return (
     <>
       <ParticlesBackground />
-    {/* <ScrollToTop /> */}
+      {/* <ScrollToTop /> */}
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/" element={<Layout />}>
@@ -62,71 +50,6 @@ export const App: React.FC = () => {
             element={
               <PageWrapper>
                 <Home />
-              </PageWrapper>
-            }
-          />
-
-          <Route
-            path="/service"
-            element={
-              <PageWrapper>
-                <ServicesMain />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="/service/customer-experience"
-            element={
-              <PageWrapper>
-                <CustomerExperience />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="/service/pos-staff-operations"
-            element={
-              <PageWrapper>
-                <PosStaffOperations />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="/service/kitchen-fulfillment"
-            element={
-              <PageWrapper>
-                <KitchenFulfillment />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="/service/inventory-warehousing"
-            element={
-              <PageWrapper>
-                <InventoryWarehousing />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="/service/analytics-management"
-            element={
-              <PageWrapper>
-                <AnalyticsManagement />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="/service/marketing-customization"
-            element={
-              <PageWrapper>
-                <MarketingCustomization />
-              </PageWrapper>
-            }
-          />
-          <Route
-            path="/service/integration-scaling"
-            element={
-              <PageWrapper>
-                <IntegrationScaling />
               </PageWrapper>
             }
           />

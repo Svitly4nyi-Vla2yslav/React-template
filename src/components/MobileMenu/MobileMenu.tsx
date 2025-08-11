@@ -9,12 +9,10 @@ import {
   DropdownMenuMobile,
   DropdownItemMobile,
   ServiceLinkMobile,
-  ArrowDownMobile,
   ServiceTitleWrapper,
 } from './MobileMenu.styled';
 import { StyledNavLink, StyledNavLinkDrop } from '../Header/Header.styled';
 import { useTranslation } from 'react-i18next';
-import Down from '../../assets/icons/chevron-down.svg';
 
 const topLineVariants = {
   open: { rotate: 45, y: 8 },
@@ -136,11 +134,7 @@ const BurgerMenu = () => {
                     <MenuLink onClick={toggleServicesMenu}>
                       <ServiceTitleWrapper>
                         <span>{t(link.labelKey)}</span>
-                        <ArrowDownMobile
-                          src={Down}
-                          alt="▼"
-                          $isOpen={isServicesOpen}
-                        />
+                     
                       </ServiceTitleWrapper>
                     </MenuLink>
                     <AnimatePresence>

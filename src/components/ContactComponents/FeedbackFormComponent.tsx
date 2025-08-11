@@ -3,11 +3,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { HeroTitle, HeroInnovative } from '../Hero/Hero.styled';
-import { ResultMainTextDescription } from '../ResultsFromBusinesses/ResultsFromBusinesses.styled';
-import { CardButtonText } from '../AllinOneSRM/AllinOneSRM.styled';
-import star from '../../assets/icons/Bellhop.svg';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
-import { db } from '../../firebase';
 import { Alert, AlertType } from './Alert';
 const FeedbackWrapper = styled.div`
   margin: 80px auto;
@@ -214,10 +209,7 @@ const FeedbackFormComponent: React.FC = () => {
     e.preventDefault();
 
     try {
-      await addDoc(collection(db, 'feedbackMessages'), {
-        ...formData,
-        createdAt: serverTimestamp(),
-      });
+    
       setAlert({
         type: 'success',
         message: t('feedback2.form.success'),
@@ -249,12 +241,10 @@ const FeedbackFormComponent: React.FC = () => {
         viewport={{ once: true }}
       >
         <HeroInnovative>
-          {t('feedback1.title')} <CardButtonText src={star} alt="star" />
+          {t('feedback1.title')}
         </HeroInnovative>
         <HeroTitle>{t('feedback1.subtitle')}</HeroTitle>
-        <ResultMainTextDescription>
-          {t('feedback1.description')}
-        </ResultMainTextDescription>
+      
 
         <FeedbackContainer>
           <FeedbackForm onSubmit={handleSubmit}>

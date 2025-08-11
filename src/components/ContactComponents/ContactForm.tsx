@@ -2,12 +2,7 @@ import { motion } from 'framer-motion';
 import React, { useState, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { HeroInnovative, HeroTitle } from '../Hero/Hero.styled';
-import { CardButtonText } from '../AllinOneSRM/AllinOneSRM.styled';
-import star from '../../assets/icons/Star-copy.svg';
-import { ResultMainTextDescription } from '../ResultsFromBusinesses/ResultsFromBusinesses.styled';
 import { useTranslation } from 'react-i18next';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
-import { db } from '../../firebase';
 import { Alert, AlertType } from './Alert';
 
 export const ContactWrapper = styled.div`
@@ -379,11 +374,7 @@ const ContactForm: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      await addDoc(collection(db, 'contactMessages'), {
-        email,
-        teammates,
-        createdAt: serverTimestamp(),
-      });
+     
 
       setEmail('');
       setTeammates('');
@@ -427,7 +418,7 @@ const ContactForm: React.FC = () => {
           }}
         >
           <HeroInnovative>
-            {t('contact.getStarted')} <CardButtonText src={star} alt="star" />
+            {t('contact.getStarted')}
           </HeroInnovative>
         </motion.div>
         <motion.div
@@ -444,9 +435,7 @@ const ContactForm: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           viewport={{ once: false, amount: 0.3 }}
         >
-          <ResultMainTextDescription>
-            {t('contact.description')}
-          </ResultMainTextDescription>
+         
         </motion.div>
       </CostomerWrapp>
 

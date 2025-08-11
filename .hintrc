@@ -24,6 +24,8 @@
       {
         "select-name": "off"
       }
-    ]
+    ],
+    "disown-opener": "off",
+    "axe/language": "off"
   }
 }

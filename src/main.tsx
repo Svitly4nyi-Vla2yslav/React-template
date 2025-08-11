@@ -6,7 +6,6 @@ import { App} from './App.tsx';
 import { Global } from '@emotion/react';
 import React from 'react';
 import './i18n';
-import 'aos/dist/aos.css';
 import 'modern-normalize/modern-normalize.css';
 import { LanguageProvider } from './components/LanguageSwitcher/LanguageContext';
 

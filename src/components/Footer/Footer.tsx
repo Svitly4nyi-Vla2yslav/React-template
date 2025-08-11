@@ -15,19 +15,13 @@ import {
   Link,
   Logo,
   Point,
-  SocialIcon,
   SocialLink,
   SocialWrapper,
   WraperLink,
 } from './Footer.styled';
-import 'aos/dist/aos.css';
-import logo from '../../assets/icons/logo-srm.svg';
-import In from '../../assets/icons/social/in.svg';
-import Insta from '../../assets/icons/social/inst.svg';
-import Faceboock from '../../assets/icons/social/faceboock.svg';
+
 
 import { PoliciesContent } from './PoliciesContent';
-import { StyledNavLink } from '../AllinOneSRM/AllinOneSRM.styled';
 import { useSmoothScroll } from '../../utils/useSmoothScroll';
 
 const Footer: React.FC = () => {
@@ -62,7 +56,6 @@ const Footer: React.FC = () => {
         <FooterWrapp>
           <Container> 
             <Logo  onClick={() => scrollTo('hero', "home")} style={{ marginBottom: 16 }}>
-              <img src={logo} alt="Logo" />
             </Logo>
           </Container>
           <Deckstop>
@@ -80,27 +73,7 @@ const Footer: React.FC = () => {
             </Container>
             <Container>
               <WraperLink>{t('footer.sections.product')}</WraperLink>
-              <StyledNavLink to="/service/customer-experience#ap">
-                {t('footer.links.customerExperience')}
-              </StyledNavLink>
-              <StyledNavLink to="/service/pos-staff-operations#ap">
-                {t('footer.links.posStaff')}
-              </StyledNavLink>
-              <StyledNavLink to="/service/kitchen-fulfillment#ap">
-                {t('footer.links.kitchen')}
-              </StyledNavLink>
-              <StyledNavLink to="/service/inventory-warehousing#ap">
-                {t('footer.links.inventory')}
-              </StyledNavLink>
-              <StyledNavLink to="/service/analytics-management#ap">
-                {t('footer.links.analytics')}
-              </StyledNavLink>
-              <StyledNavLink to="/service/marketing-customization#ap">
-                {t('footer.links.marketing')}
-              </StyledNavLink>
-              <StyledNavLink to="/service/integration-scaling#ap">
-                {t('footer.links.integration')}
-              </StyledNavLink>
+            
             </Container>
 
             <Container>
@@ -135,21 +108,18 @@ const Footer: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <SocialIcon src={In} alt="🔗" />
               </SocialLink>
               <SocialLink
                 href="https://www.instagram.com/sabsus.app/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <SocialIcon src={Insta} alt="🔗" />
               </SocialLink>
               <SocialLink
                 href="https://www.linkedin.com/company/sabsus/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <SocialIcon src={Faceboock} alt="🔗" />
               </SocialLink>
             </SocialWrapper>{' '}
           </ContainerSocialDemo>
