@@ -1,7 +1,7 @@
 import { createContext, useContext, ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
-type Language = 'en' | 'ru' | 'es' | 'ua';
+type Language = 'en' | 'ru' | 'es' | 'uk';
 
 interface LanguageContextProps {
   language: Language;
