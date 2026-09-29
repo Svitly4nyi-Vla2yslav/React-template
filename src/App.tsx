@@ -6,7 +6,6 @@ import Contact from './pages/Contact/Contact';
 import Info from './pages/Info/Info';
 // import ParticlesBackground from './components/Background/StarrySky';
 
-import { Time } from './components/ScrollToTop';
 import { useEffect } from 'react';
 // import { useEffect } from 'react';
 
@@ -89,7 +88,6 @@ export const App: React.FC = () => {
           />
         </Route>
       </Routes>
-      <Time />
     </>
   );
 };
