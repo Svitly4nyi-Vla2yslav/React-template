@@ -2,6 +2,11 @@
 const CACHE_PREFIX = 'media_cache_';
 const CACHE_EXPIRATION_DAYS = 7;
 
+/**
+ * Повертає медіа за URL, використовуючи localStorage-кеш строком до семи днів.
+ * Зображення завантажуються й зберігаються як data URL, для відео кешується вихідна адреса;
+ * за помилки мережі функція повертає початковий URL, не перериваючи рендеринг.
+ */
 export const fetchWithCache = async (url: string): Promise<string> => {
   const cacheKey = CACHE_PREFIX + url;
   const cachedItem = localStorage.getItem(cacheKey);
@@ -9,18 +14,18 @@ export const fetchWithCache = async (url: string): Promise<string> => {
   if (cachedItem) {
     const { data, timestamp, isVideo } = JSON.parse(cachedItem);
     
-    // Check if cache is still valid
+    // Перевіряє строк придатності раніше збереженого запису.
     if (Date.now() - timestamp < CACHE_EXPIRATION_DAYS * 24 * 60 * 60 * 1000) {
       if (isVideo) {
-        // For video, use the video URL directly
+        // Для відео повертає збережену початкову адресу.
         return data;
       } else {
-        // For images, return base64-encoded data
+        // Для зображення повертає збережений data URL.
         return data;
       }
     }
 
-    // Remove expired cache
+    // Прострочений запис видаляється перед новим завантаженням.
     localStorage.removeItem(cacheKey);
   }
 
@@ -31,7 +36,7 @@ export const fetchWithCache = async (url: string): Promise<string> => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    // For images
+    // Зображення перетворюється на data URL через FileReader.
     if (url.match(/\.(jpeg|jpg|gif|png|webp)$/i)) {
       const blob = await response.blob();
       const reader = new FileReader();
@@ -50,7 +55,7 @@ export const fetchWithCache = async (url: string): Promise<string> => {
         reader.readAsDataURL(blob);
       });
     }
-    // For video
+    // Відео не записується цілком у localStorage: кешується лише URL.
     else if (url.match(/\.(mp4|webm|ogg)$/i)) {
       localStorage.setItem(cacheKey, JSON.stringify({
         data: url,
@@ -67,7 +72,10 @@ export const fetchWithCache = async (url: string): Promise<string> => {
   }
 };
 
-// Clean up expired cache items
+/**
+ * Перебирає лише записи з префіксом медіакешу та видаляє старші за сім днів.
+ * Функція нічого не повертає й змінює localStorage; інші ключі не зачіпає.
+ */
 export const cleanupCache = () => {
   Object.keys(localStorage).forEach(key => {
     if (key.startsWith(CACHE_PREFIX)) {
@@ -82,5 +90,5 @@ export const cleanupCache = () => {
   });
 };
 
-// Run cleanup on initialization
+// Очищення запускається один раз як побічний ефект імпорту модуля.
 cleanupCache();
