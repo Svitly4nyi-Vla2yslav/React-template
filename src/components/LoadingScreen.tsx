@@ -33,6 +33,7 @@ const LoadingText = styled(motion.div)`
   letter-spacing: 0.05em;
 `;
 
+// Варіант анімації циклічно змінює прозорість текстового контейнера, якщо в ньому з’явиться вміст.
 const textAnimation = {
   animate: {
     opacity: [0.3, 1, 0.3],
@@ -43,6 +44,8 @@ const textAnimation = {
   },
 };
 
+// Компонент не приймає аргументів і повертає повноекранний індикатор очікування.
+// SVG-логотип обертається безперервно; компонент не запускає запитів і не змінює зовнішній стан.
 const LoadingScreen = () => {
   return (
     <LoaderContainer>
