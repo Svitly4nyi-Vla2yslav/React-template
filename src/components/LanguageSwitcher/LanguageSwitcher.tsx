@@ -86,6 +86,7 @@ const FlagIcon = styled.span`
   font-size: 16px;
 `;
 
+// LanguageSwitcher показує поточну мову i18next і меню доступних локалей; аргументів компонент не приймає.
 const LanguageSwitcher = () => {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
@@ -99,8 +100,10 @@ const LanguageSwitcher = () => {
 
   const selectedLang = languages.find(lang => lang.code === i18n.language) || languages[0];
 
+  // toggleMenu інвертує лише локальний стан випадаючого меню.
   const toggleMenu = () => setIsOpen(prev => !prev);
 
+  // handleLanguageChange приймає код локалі, чекає оновлення i18next, закриває меню й перезавантажує сторінку.
   const handleLanguageChange = async (langCode: string) => {
     await i18n.changeLanguage(langCode);
     setIsOpen(false);
