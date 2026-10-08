@@ -335,6 +335,10 @@ export const HelpCenterText = styled.p`
   margin: 0 auto;
 `;
 
+/**
+ * Відображає контактну форму, перевіряє email і переводить користувача
+ * на сторінку запису в Google Calendar. Значення форми не надсилаються на сервер.
+ */
 const ContactForm: React.FC = () => {
   const { t } = useTranslation();
   const [email, setEmail] = useState('');
@@ -348,11 +352,13 @@ const ContactForm: React.FC = () => {
     message: string;
     show: boolean;
   }>({ type: 'success', message: '', show: false });
+  // Перевіряє базову структуру адреси; повертає true лише для непорожнього local@domain.tld.
   const validateEmail = (email: string) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
   };
 
+  // Синхронізує введене значення та одразу прибирає або показує локальну помилку.
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setEmail(value);
@@ -363,6 +369,10 @@ const ContactForm: React.FC = () => {
     }
   };
 
+  /**
+   * Зупиняє стандартне відправлення форми, перевіряє email і відкриває зовнішню
+   * сторінку запису. Під час переходу блокує кнопку та повідомляє про результат.
+   */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
