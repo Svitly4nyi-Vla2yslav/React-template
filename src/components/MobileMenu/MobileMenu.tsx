@@ -34,11 +34,16 @@ const menuVariants = {
   closed: { opacity: 0, x: '-100%' },
 };
 
+/**
+ * Відображає анімоване мобільне меню та окремо керує списком послуг.
+ * Відкритий оверлей блокує прокручування body, а вибір пункту закриває обидва рівні.
+ */
 const BurgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const { t } = useTranslation();
 
+  // Синхронізує прокручування сторінки зі станом оверлею та відновлює його після демонтажу.
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : 'auto';
     return () => {
@@ -46,12 +51,14 @@ const BurgerMenu = () => {
     };
   }, [isOpen]);
 
+  // Перемикає підменю, не запускаючи стандартну дію та спливання події.
   const toggleServicesMenu = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     setIsServicesOpen(!isServicesOpen);
   };
 
+  // Закриває головний оверлей разом із вкладеним списком послуг.
   const closeMenu = () => {
     setIsOpen(false);
     setIsServicesOpen(false);
@@ -115,6 +122,7 @@ const BurgerMenu = () => {
         />
       </BurgerButton>
 
+      {/* AnimatePresence використовує ці стани і під час появи, і під час виходу з DOM. */}
       <AnimatePresence>
         {isOpen && (
           <MenuOverlay
