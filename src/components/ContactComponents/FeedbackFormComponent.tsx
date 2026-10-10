@@ -171,6 +171,11 @@ const CheckboxLabel = styled.label`
   color: var(--white-100);
   cursor: pointer;
 `;
+/**
+ * Керує локальними полями демонстраційної форми та сповіщенням про результат.
+ * Поточний submit не виконує мережевого запиту чи запису в сховище: після локальної обробки
+ * він показує повідомлення про успіх і повертає поля до початкових значень.
+ */
 const FeedbackFormComponent: React.FC = () => {
   const { t } = useTranslation();
   const [formData, setFormData] = useState({
@@ -190,6 +195,7 @@ const FeedbackFormComponent: React.FC = () => {
   }>({ type: 'success', message: '', show: false });
 
 
+  /** Оновлює поле за його `name`; для checkbox використовує `checked`, для інших полів — `value`. */
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -205,6 +211,7 @@ const FeedbackFormComponent: React.FC = () => {
     }));
   };
 
+  /** Перехоплює submit, показує локальний успішний стан і очищає форму без зовнішніх побічних ефектів. */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
