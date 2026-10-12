@@ -24,11 +24,17 @@ import {
 import { PoliciesContent } from './PoliciesContent';
 import { useSmoothScroll } from '../../utils/useSmoothScroll';
 
+/**
+ * Рендерить навігацію, зовнішні demo/social посилання та локалізовані правові розділи.
+ * Клік по legal-пункту монтує `PoliciesContent`, після чого footer із короткою затримкою
+ * прокручує до вибраної секції; таймер очищується при зміні вибору або unmount.
+ */
 const Footer: React.FC = () => {
     const { scrollTo } = useSmoothScroll();
   const { t } = useTranslation();
   const [showPolicies, setShowPolicies] = useState(false);
   const [activePolicy, setActivePolicy] = useState<string | null>(null);
+  // Очікує монтування legal-розмітки й лише тоді запускає анімовану прокрутку з відступом під header.
   useEffect(() => {
     if (showPolicies && activePolicy) {
       const timer = setTimeout(() => {
@@ -44,6 +50,7 @@ const Footer: React.FC = () => {
     }
   }, [showPolicies, activePolicy]);
 
+  /** Запам’ятовує цільовий policy id і робить правовий контент доступним для наступної прокрутки. */
   const handlePolicyClick = (policy: string) => {
     setActivePolicy(policy);
     setShowPolicies(true);
