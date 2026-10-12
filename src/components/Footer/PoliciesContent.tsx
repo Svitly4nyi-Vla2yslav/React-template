@@ -13,11 +13,17 @@ interface PoliciesContentProps {
   activePolicy: string | null;
 }
 
+/**
+ * Рендерить локалізовані privacy, cookie/terms та appendix-секції з ключів i18next.
+ * `activePolicy` не приховує інші секції: після зміни компонент шукає відповідний DOM id
+ * і запускає native smooth-scroll, якщо елемент уже існує.
+ */
 export const PoliciesContent: React.FC<PoliciesContentProps> = ({
   activePolicy,
 }) => {
   const { t } = useTranslation();
 
+  // Синхронізує зміну активного policy з позицією документа без таймерів або зміни URL.
   useEffect(() => {
     if (activePolicy) {
       const element = document.getElementById(activePolicy);
