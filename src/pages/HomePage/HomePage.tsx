@@ -7,6 +7,10 @@ import React from 'react';
 
 
 
+/**
+ * Збирає домашню сторінку з hero-блоком і демонстраційною feedback-формою.
+ * Компонент не приймає аргументів і повертає секцію з id=hero без власного стану.
+ */
 const Home: React.FC = () => {
   
   return (
@@ -22,3 +26,4 @@ const Home: React.FC = () => {
 };
 
 export default Home;
+
