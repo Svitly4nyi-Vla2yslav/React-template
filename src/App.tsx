@@ -9,10 +9,16 @@ import Info from './pages/Info/Info';
 import { useEffect } from 'react';
 // import { useEffect } from 'react';
 
+/** Обгортає сторінковий React-вузол у контейнер на всю ширину без побічних ефектів. */
 const PageWrapper = ({ children }: { children: React.ReactNode }) => {
   return <div style={{ width: '100%', position: 'relative' }}>{children}</div>;
 };
 
+/**
+ * Повертає прокрутку на початок після зміни pathname.
+ * Компонент нічого не рендерить; побічний ефект відкладається через requestAnimationFrame,
+ * щоб виконатися після оновлення DOM. Наразі його виклик у App закоментований.
+ */
 export const ScrollToTop = () => {
   const { pathname } = useLocation();
 
@@ -26,6 +32,10 @@ export const ScrollToTop = () => {
   return null;
 };
 
+/**
+ * Описує дерево маршрутів застосунку: редирект із кореня, спільний Layout,
+ * сторінки home/about/pricing/contact і fallback на Home для невідомого шляху.
+ */
 export const App: React.FC = () => {
   const location = useLocation();
 
@@ -91,3 +101,4 @@ export const App: React.FC = () => {
     </>
   );
 };
+
