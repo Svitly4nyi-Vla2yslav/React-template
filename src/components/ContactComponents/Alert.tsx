@@ -44,6 +44,10 @@ const CloseButton = styled.button`
   margin-left: 12px;
 `;
 
+/**
+ * Показує анімоване повідомлення успіху або помилки з ручним і необов'язковим автоматичним закриттям.
+ * Приймає тип, власний текст і onClose; без message використовує локалізований текст за замовчуванням.
+ */
 export const Alert: React.FC<AlertProps> = ({
   type,
   message,
@@ -53,6 +57,7 @@ export const Alert: React.FC<AlertProps> = ({
 }) => {
   const { t } = useTranslation();
 
+  // Створює таймер лише для autoClose і гарантовано очищає його при зміні параметрів або демонтуванні.
   useEffect(() => {
     if (autoClose) {
       const timer = setTimeout(() => {
