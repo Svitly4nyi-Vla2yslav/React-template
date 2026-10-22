@@ -9,6 +9,8 @@ import './i18n';
 import 'modern-normalize/modern-normalize.css';
 import { LanguageProvider } from './components/LanguageSwitcher/LanguageContext';
 
+// Створює єдиний React-root, підключає глобальні стилі й BrowserRouter,
+// а LanguageProvider надає вибрану локаль усьому дереву шаблону.
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Global styles={GlobalStyle} />
