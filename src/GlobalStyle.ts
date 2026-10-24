@@ -9,6 +9,9 @@ import HelveticaNeueRoman from "../src/assets/fonts/HelveticaNeueRoman.otf"
 import Inter_24ptRegular from "../src/assets/fonts/Inter_24pt-Regular.ttf"
 import PlusJakartaSans from "../src/assets/fonts/PlusJakartaSans[wght].ttf"
 
+// GlobalStyle реєструє локальні шрифти, CSS-змінні та базове скидання,
+// а також safe-area й мобільні виправлення. Підключення через Emotion
+// застосовує ці правила до всього документа, а не до окремого компонента.
 export const GlobalStyle = css`
   /* Font Awesome */
   @font-face {
