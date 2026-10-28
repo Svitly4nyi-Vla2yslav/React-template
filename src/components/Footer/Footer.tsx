@@ -25,9 +25,10 @@ import { PoliciesContent } from './PoliciesContent';
 import { useSmoothScroll } from '../../utils/useSmoothScroll';
 
 /**
- * Рендерить навігацію, зовнішні demo/social посилання та локалізовані правові розділи.
- * Клік по legal-пункту монтує `PoliciesContent`, після чого footer із короткою затримкою
- * прокручує до вибраної секції; таймер очищується при зміні вибору або unmount.
+ * Рендерить footer без вхідних параметрів: навігацію, зовнішні demo/social посилання
+ * та локалізовані правові розділи. Повертає також PoliciesContent після вибору policy.
+ * Клік монтує розмітку, запускає відкладену прокрутку, а cleanup скасовує таймер
+ * при зміні вибору або демонтажі компонента.
  */
 const Footer: React.FC = () => {
     const { scrollTo } = useSmoothScroll();
@@ -50,7 +51,10 @@ const Footer: React.FC = () => {
     }
   }, [showPolicies, activePolicy]);
 
-  /** Запам’ятовує цільовий policy id і робить правовий контент доступним для наступної прокрутки. */
+  /**
+   * Приймає DOM-id правового розділу, запам’ятовує його й відкриває policy-розмітку.
+   * Нічого не повертає; оновлення стану дає ефекту змогу прокрутити до вже змонтованої секції.
+   */
   const handlePolicyClick = (policy: string) => {
     setActivePolicy(policy);
     setShowPolicies(true);
