@@ -16,7 +16,7 @@ const ErrorContainer = styled(motion.div)`
   user-select: none;
 `;
 
-// Одноразове горизонтальне тремтіння привертає увагу після появи повідомлення.
+/** Описує одноразове горизонтальне тремтіння, яке Framer Motion застосовує після появи повідомлення. */
 const shakeAnimation = {
   x: [0, -10, 10, -10, 10, 0],
   transition: { 
@@ -30,8 +30,11 @@ interface ErrorScreenProps {
   message: string;
 }
 
-// Компонент приймає текст помилки та повертає повноекранне повідомлення.
-// role="alert" і aria-live="assertive" спонукають допоміжні технології оголосити його негайно.
+/**
+ * Приймає message і повертає повноекранне повідомлення з одноразовою shake-анімацією.
+ * role='alert' та aria-live='assertive' забезпечують негайне оголошення допоміжними технологіями;
+ * локального стану, callback і побічних ефектів компонент не має.
+ */
 const ErrorScreen: React.FC<ErrorScreenProps> = ({ message }) => (
   <ErrorContainer {...shakeAnimation} role="alert" aria-live="assertive">
     Помилка: {message}
