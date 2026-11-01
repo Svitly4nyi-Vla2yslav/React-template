@@ -3,35 +3,33 @@ import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
-// Layout обгортає дочірній маршрут спільними Header/Footer і керує позицією прокрутки після переходу.
+/**
+ * Обгортає дочірній маршрут спільними Header і Footer та показує його через Outlet.
+ * Після зміни pathname прокручує сторінку на початок або, якщо URL містить hash,
+ * після 400 мс переходить до цільового елемента. Компонент не має локального стану.
+ */
 export const Layout: React.FC = () => {
   const location = useLocation();
 
-  // useEffect(() => {
-  //   window.scrollTo({ top: 0, behavior: 'auto' });
-  // }, [location.pathname]);
 
-// Ефект реагує на зміну pathname: для hash намагається знайти секцію, інакше повертає сторінку на початок.
-// Затримка дає вкладеному маршруту час змонтувати цільовий елемент перед scrollIntoView.
-useEffect(() => {
+  // Затримка дає вкладеному маршруту час змонтувати цільову секцію перед scrollIntoView.
+  useEffect(() => {
   if (location.hash) {
     const id = location.hash.replace('#', '');
     const element = document.getElementById(id);
 
     if (element) {
       setTimeout(() => {
-        // Прокручує плавно до елемента
         element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 400);
     }
   } else {
-    // Тут ти керуєш точкою скролу
     window.scrollTo({
-      top: 0,       // <– хочеш іншу висоту? наприклад: 100, 300 і т.д.
-      behavior: 'auto', // або 'smooth'
+      top: 0,
+      behavior: 'auto',
     });
   }
-}, [location.pathname]); // важливо: слухаємо тільки pathname, не весь location
+  }, [location.pathname]); // Hash читається лише під час зміни pathname.
 
   return (
     <>
