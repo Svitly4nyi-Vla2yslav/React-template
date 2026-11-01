@@ -6,12 +6,14 @@ const CACHE_EXPIRATION_DAYS = 7;
  * Повертає медіа за URL, використовуючи localStorage-кеш строком до семи днів.
  * Зображення завантажуються й зберігаються як data URL, для відео кешується вихідна адреса;
  * за помилки мережі функція повертає початковий URL, не перериваючи рендеринг.
+ * Побічні ефекти: fetch, читання/запис localStorage та FileReader для підтримуваних зображень.
  */
 export const fetchWithCache = async (url: string): Promise<string> => {
   const cacheKey = CACHE_PREFIX + url;
   const cachedItem = localStorage.getItem(cacheKey);
 
   if (cachedItem) {
+    // Запис очікується у внутрішньому JSON-форматі { data, timestamp, isVideo }.
     const { data, timestamp, isVideo } = JSON.parse(cachedItem);
     
     // Перевіряє строк придатності раніше збереженого запису.
@@ -75,6 +77,7 @@ export const fetchWithCache = async (url: string): Promise<string> => {
 /**
  * Перебирає лише записи з префіксом медіакешу та видаляє старші за сім днів.
  * Функція нічого не повертає й змінює localStorage; інші ключі не зачіпає.
+ * Вона очікує, що записи з CACHE_PREFIX містять JSON із числовим timestamp.
  */
 export const cleanupCache = () => {
   Object.keys(localStorage).forEach(key => {
