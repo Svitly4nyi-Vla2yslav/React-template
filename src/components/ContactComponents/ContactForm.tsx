@@ -339,6 +339,12 @@ export const HelpCenterText = styled.p`
  * Відображає контактну форму, перевіряє email і переводить користувача
  * на сторінку запису в Google Calendar. Значення форми не надсилаються на сервер.
  */
+/**
+ * Керує демонстраційною контактною формою та локальними сповіщеннями.
+ *
+ * Компонент перевіряє email, імітує асинхронне надсилання, очищає поля після
+ * успіху й відкриває сторінку запису Google Calendar у новій вкладці.
+ */
 const ContactForm: React.FC = () => {
   const { t } = useTranslation();
   const [email, setEmail] = useState('');
@@ -353,12 +359,23 @@ const ContactForm: React.FC = () => {
     show: boolean;
   }>({ type: 'success', message: '', show: false });
   // Перевіряє базову структуру адреси; повертає true лише для непорожнього local@domain.tld.
+  /**
+   * Перевіряє базову структуру адреси без мережевих запитів.
+   *
+   * @param email — значення поля email.
+   * @returns true для рядка з локальною частиною, @ і доменом із крапкою.
+   */
   const validateEmail = (email: string) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
   };
 
   // Синхронізує введене значення та одразу прибирає або показує локальну помилку.
+  /**
+   * Оновлює email і прибирає або залишає помилку, якщо перевірку вже запускали.
+   *
+   * @param e — подія зміни поля.
+   */
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setEmail(value);
@@ -372,6 +389,12 @@ const ContactForm: React.FC = () => {
   /**
    * Зупиняє стандартне відправлення форми, перевіряє email і відкриває зовнішню
    * сторінку запису. Під час переходу блокує кнопку та повідомляє про результат.
+   */
+  /**
+   * Скасовує browser submit, перевіряє email і виконує демонстраційний сценарій успіху.
+   *
+   * @param e — подія надсилання форми.
+   * @sideEffects Перемикає loading/alert, очищає поля та відкриває зовнішній календар.
    */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
