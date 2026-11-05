@@ -35,6 +35,10 @@ export const ScrollToTop = () => {
 /**
  * Описує дерево маршрутів застосунку: редирект із кореня, спільний Layout,
  * сторінки home/about/pricing/contact і fallback на Home для невідомого шляху.
+ *
+ * Routes отримує location і key=pathname, тому зміна шляху перемонтовує дерево
+ * сторінки; hash сам по собі ключ не змінює. Fallback показує Home на поточному
+ * невідомому URL без додаткового редиректу.
  */
 export const App: React.FC = () => {
   const location = useLocation();
@@ -43,6 +47,7 @@ export const App: React.FC = () => {
     <>
       {/* <ParticlesBackground /> */}
       {/* <ScrollToTop /> */}
+      {/* Ключ за pathname ізолює стан різних сторінок, але не реагує на зміну hash. */}
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/" element={<Layout />}>
