@@ -94,6 +94,7 @@ const LanguageSwitcher = () => {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
 
+  // Підписи читаються з активної локалі; code передається безпосередньо до i18next.
   const languages = [
     { code: 'en', label: t('languageSwitcher.english'), flag: '🇬🇧' },
     { code: 'es', label: t('languageSwitcher.spanish'), flag: '🇪🇸' },
@@ -101,12 +102,14 @@ const LanguageSwitcher = () => {
     { code: 'uk', label: t('languageSwitcher.ukrainian'), flag: '🇺🇦' }
   ];
 
+  // Невідома або регіональна локаль, якої немає в каталозі, відображається як перша — English.
   const selectedLang = languages.find(lang => lang.code === i18n.language) || languages[0];
 
-  /** Інвертує лише локальний стан випадаючого меню. */
+  /** Інвертує лише локальний стан випадаючого меню та нічого не повертає. */
   const toggleMenu = () => setIsOpen(prev => !prev);
 
   /**
+   * @param langCode — код із локального каталогу languages.
    * Приймає код локалі та очікує оновлення i18next.
    * Побічні ефекти: закриває меню й перезавантажує документ для повного застосування перекладу.
    */
