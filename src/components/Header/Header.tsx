@@ -19,8 +19,9 @@ import { useNavigate } from 'react-router-dom';
 import BurgerMenu from '../MobileMenu/MobileMenu';
 
 /**
- * Відображає адаптивну навігацію, змінює стиль після прокручування
- * та керує desktop-підменю послуг; на вузьких екранах показує BurgerMenu.
+ * Відображає адаптивну навігацію без вхідних параметрів.
+ * Після 50 px прокручування змінює оформлення шапки, на desktop керує підменю послуг,
+ * а до 1439 px замінює основну навігацію на BurgerMenu.
  */
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -28,7 +29,11 @@ const Header: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  // Перехоплює клік логотипа, плавно прокручує вгору й за потреби переходить на /home.
+  /**
+   * Скасовує стандартний перехід логотипа, плавно прокручує документ угору
+   * і переходить на /home, якщо користувач перебуває на іншому маршруті.
+   */
+
   const handleLogoClick = (e: React.MouseEvent) => {
     e.preventDefault();
     window.scrollTo({
@@ -41,7 +46,8 @@ const Header: React.FC = () => {
     }
   };
 
-  // Перемикає локальний стан desktop-підменю; hover-обробники також можуть його змінити.
+  /** Перемикає локальний стан desktop-підменю; hover-обробники також можуть його змінити. */
+
   const toggleServicesMenu = () => {
     setIsServicesOpen(!isServicesOpen);
   };
@@ -49,6 +55,7 @@ const Header: React.FC = () => {
   // Реєструє один scroll-слухач і в cleanup прибирає його під час демонтажу шапки.
   useEffect(() => {
  
+    // Обчислює компактний стан шапки з поточної вертикальної позиції браузера.
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
