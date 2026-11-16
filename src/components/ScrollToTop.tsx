@@ -34,6 +34,10 @@ export const Time = () => {
   return <></>;
 };
 
+/**
+ * Після кожної зміни pathname запускає плавне прокручування вікна до початку.
+ * Зміни лише query або hash ефект не перезапускають; компонент нічого не рендерить.
+ */
 const ScrollToTop: React.FC = () => {
   const { pathname } = useLocation();
 
